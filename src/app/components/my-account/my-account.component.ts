@@ -21,6 +21,7 @@ export class MyAccountComponent implements OnInit {
   private emailExists:boolean;
   private username:string;
   private password:string;
+  private email:string;
 
   private emailNotExists:boolean = false;
   private forgetPasswordEmailSent: boolean;
@@ -71,6 +72,7 @@ export class MyAccountComponent implements OnInit {
         this.emailSent = true;
       }, error => {
         console.log(error.text());
+        let errorMessage = error.text();
         if(errorMessage === "emailExists") this.emailExists = true;
       }
     )
