@@ -14,10 +14,10 @@ export class LoginService {
     let url = this.serverPath + '/token';
     let encodedCredentials = btoa(username+":"+password);
     let basicHeader = "Basic " + encodedCredentials;
-    let headers = new Headers {
+    let headers = new Headers ({
       'Content-Type' : 'application/x-www-form-urlencoded',
       'Authorization' : basicHeader
-    }
+    })
 
     return this.http.get(url, {headers: headers});
   }
@@ -37,6 +37,6 @@ export class LoginService {
       'x-auth-token' : localStorage.getItem('xAuthToken')
     });
 
-    return this.http.post(url, '', {headers: headers}); 
+    return this.http.post(url, '', {headers: headers});
   }
 }

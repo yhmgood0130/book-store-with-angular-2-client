@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing } from './app.routing';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
@@ -27,7 +29,9 @@ import { MyAccountComponent } from './components/my-account/my-account.component
     FormsModule,
     HttpModule,
     routing,
-    MatButtonModule
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [
     LoginService,

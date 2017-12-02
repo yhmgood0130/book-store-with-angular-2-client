@@ -21,15 +21,19 @@ body {
     padding-top: 0;
 }
 
-md-input-container {
+.mat-tab-label {
+  color:#6b6b6b;
+}
+
+mat-input-container {
     width: 100%;
 }
 
-md-select {
+mat-select {
     width: 100%;
 }
 
-md-slide-toggle {
+mat-slide-toggle {
     width:100%;
 }
 
