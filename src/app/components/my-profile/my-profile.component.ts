@@ -26,11 +26,11 @@ export class MyProfileComponent implements OnInit {
   constructor(private loginService:LoginService, private userService:UserService, private router:Router) { }
 
   onUpdateUserInfo() {
-    this.userService.updateUserInfo(this.user, this.newPassword).subscribe(
+    this.userService.updateUserInfo(this.user, this.newPassword, this.currentPassword).subscribe(
       res => {
         console.log(res.text());
         this.updateSuccess = true;
-      } error => {
+      }, error => {
         console.log(error.text());
         let errorMessage = error.text();
         if(errorMessage === "Incorrect current password!") this.incorrectPassword = true;
