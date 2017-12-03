@@ -59,7 +59,7 @@
                 </div>
               </mat-tab>
               <mat-tab label="Forget Password">
-                <div class="alert alert-info" *ngIf="emailNotExists">Email does not exist.</div>
+                <div class="alert alert-warning" *ngIf="emailNotExists">Email does not exist.</div>
                 <div class="alert alert-success" *ngIf="forgetPasswordEmailSent">Email Sent.</div>
                 <form (ngSubmit)="onForgetPassword()">
                   <div class="form-group">
@@ -67,7 +67,7 @@
                     <input type="email" class="form-control" id="recoverEmail" name="recoverEmail" [(ngModel)]="recoverEmail" required="required" autofocus="autofocus">
                     <p style="color:#828282;">Enter your registered email address.</p>
                   </div>
-                  <button mat-raised-button type="submit" color="primary">Creat New Account</button>
+                  <button mat-raised-button type="submit" color="primary">Reset Password</button>
                 </form>
               </mat-tab>
             </mat-tab-group>
