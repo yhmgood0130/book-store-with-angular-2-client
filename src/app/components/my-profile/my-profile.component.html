@@ -87,7 +87,7 @@
 									<br><br>
 									<div>
 										<p *ngIf="defaultPaymentSet">Default payment set successfully!</p>
-										<mat-tab-group (selectedIndexChnage)="selectedBillingChange($event)" [selectedIndex]="selectedBillingtab">
+										<mat-tab-group (selectedIndexChange)="selectedBillingChange($event)" [selectedIndex]="selectedBillingTab">
 											<mat-tab label ="List of Credit Cards">
 												<form (ngSubmit)="setDefaultPayment()" method="post">
 													<table class="table">
@@ -107,7 +107,7 @@
 																<td>{{userPayment.cardName}}</td>
 																<td>
 																	<a mat-button (click)="onUpdatePayment(userPayment)"><i class="fa fa-pencil"></i></a>
-																	<a mat-button (click)="onRemovePayment(userPayment)"><i class="fa fa-times"></i></a>
+																	<a mat-button (click)="onRemovePayment(userPayment.id)"><i class="fa fa-times"></i></a>
 																</td>
 															</tr>
 														</tbody>

@@ -35,6 +35,7 @@ export class MyProfileComponent implements OnInit {
   private userPaymentList: UserPayment[] = [];
   private defaultPaymentSet: boolean;
   private defaultUserPaymentId: number;
+  private stateList: string[] = [];
 
   constructor(private loginService:LoginService, private userService:UserService, private paymentService:PaymentService, private router:Router) { }
 
@@ -59,6 +60,14 @@ export class MyProfileComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(
       res => {
         this.user = res.json();
+        this.userPaymentList = this.user.userPaymentList;
+
+        for(let index in this.userPaymentList){
+          if(this.userPaymentList[index].defaultPayment){
+            this.defaultUserPaymentId = this.userPaymentList[index].id;
+            break;
+          }
+        }
         this.dataFetched = true;
       }, error => {
         console.log(error);
@@ -117,6 +126,10 @@ export class MyProfileComponent implements OnInit {
     );
 
     this.getCurrentUser();
+
+    for(let s in AppConst.usStates){
+      this.stateList.push(s);
+    }
 
     this.userBilling.userBillingState="";
     this.userPayment.type="";
