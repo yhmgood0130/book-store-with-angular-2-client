@@ -19,10 +19,10 @@ export class JerseyListComponent implements OnInit {
   private jerseyList: Jersey[];
   private serverPath = AppConst.serverPath;
 
-  constructor(private jerseyService:JerseyService, private router:Router, private http:Http, private activatedRoute:ActivatedRoute) { }
+  constructor(private jerseyService:JerseyService, private router:Router, private http:Http, private route:ActivatedRoute) { }
 
   onSelect(jersey: Jersey) {
-    this.selectedJersey = Jersey;
+    this.selectedJersey = jersey;
     this.router.navigate(['/jerseyDetail', this.selectedJersey.id]);
   }
 
@@ -38,9 +38,9 @@ export class JerseyListComponent implements OnInit {
           }, error => {
             console.log(error);
           }
-        )
+        );
       }
-    })
+    });
   }
 
 }

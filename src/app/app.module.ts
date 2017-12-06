@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DataTableModule } from 'angular2-datatable';
+import { DataFilterPipe } from './components/jersey-list/data-filter.pipe';
 
 import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
@@ -30,7 +32,8 @@ import { JerseyListComponent } from './components/jersey-list/jersey-list.compon
     NavBarComponent,
     MyAccountComponent,
     MyProfileComponent,
-    JerseyListComponent
+    JerseyListComponent,
+    DataFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { JerseyListComponent } from './components/jersey-list/jersey-list.compon
     BrowserAnimationsModule,
     MatButtonModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DataTableModule
   ],
   providers: [
     LoginService,

@@ -1,3 +1,67 @@
-<p>
-  jersey-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h2 class="section-headline"><span>My Profile</span></h2>
+    </div>
+    <div class="col-xs-4">
+      <img src="../../../assets/image/logo.png" class="img-responsive right" style="width:400px; margin-top:80px; margin-bottom:20px; z-index:1;"  />
+    </div>
+    <img src="../../../assets/image/jersey.png" class="img-responsive right" style="position:absolute; width:90%; height:30%; margin-top: 90px; z-index:-2;" />
+  </div>
+  <hr style="position:absolute; width:88%; height:6px; background-color:#333; z-index:-1; margin-top:-287px;" />
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      <table class="table" [mfData]="jerseyList | dataFilter: filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+      <thead>
+        <th colspan="5">
+          <div class="row">
+            <div class="col-md-9">
+              Filter By Description:
+              <input class="form-control" [(ngModel)]="filterQuery" />
+            </div>
+            <div class="col-md-3">
+              <label for="label-control">Rows on Page</label>
+              <select class="form-control" [(ngModel)]="rowsOnPage">
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="15">15</option>
+              </select>
+            </div>
+          </div>
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jersey of mf.data">
+          <div class="row" style="margin-bottom: 30px;">
+            <div class="col-md-3">
+              <a (click)="onSelect(jersey)" style="cursor:pointer;">
+                <img class="img-responsive" src="{{serverPath}}/image/jersey/{{jersey.id}}.png" />
+              </a>
+            </div>
+            <div class="col-md-9">
+              <h4 (click)="onSelect(jersey)" style="margin-top:20px; cursor:pointer;">{{jersey.title}}</h4>
+            </div>
+            <span>{{jersey.league}}</span>
+            <p>{{jersey.team}}</p>
+            <a (click)="onSelect(jersey)" style="cursor:pointer;"><span>{{jersey.country | uppercase}}</span></a>
+            <span>{{jersey.type}}</span><span> Type</span>
+            <br />
+            <a (click)="onSelect(jersey)"><span style="font-size: x-large; color:#db3208;">$<span>{{jersey.ourPrice | number: '1.2-2'}}</span></span></a>
+            <span style="text-decoration:line-through;">$<span>{{jersey.listPrice | number: '1.2-2'}}</span></span>
+            <p>{{jersey.description | slice:0:500}}</p>
+          </div>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
