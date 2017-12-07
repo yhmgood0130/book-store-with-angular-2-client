@@ -35,6 +35,7 @@ export class JerseyListComponent implements OnInit {
         this.jerseyService.getJerseyList().subscribe(
           res => {
             console.log(res.json());
+            this.jerseyList = res.json();
           }, error => {
             console.log(error);
           }
