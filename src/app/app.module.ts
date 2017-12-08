@@ -16,6 +16,7 @@ import { UserService } from './services/user.service';
 import { PaymentService } from './services/payment.service';
 import { ShippingService } from './services/shipping.service';
 import { JerseyService } from './services/jersey.service';
+import { CartService } from './services/cart.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -23,6 +24,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { JerseyListComponent } from './components/jersey-list/jersey-list.component';
+import { JerseyDetailComponent } from './components/jersey-detail/jersey-detail.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { JerseyListComponent } from './components/jersey-list/jersey-list.compon
     MyAccountComponent,
     MyProfileComponent,
     JerseyListComponent,
-    DataFilterPipe
+    DataFilterPipe,
+    JerseyDetailComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { JerseyListComponent } from './components/jersey-list/jersey-list.compon
     UserService,
     PaymentService,
     ShippingService,
-    JerseyService
+    JerseyService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

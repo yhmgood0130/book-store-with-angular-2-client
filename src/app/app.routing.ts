@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { JerseyListComponent } from './components/jersey-list/jersey-list.component';
+import { JerseyDetailComponent } from './components/jersey-detail/jersey-detail.component';
 
 const appRoutes: Routes = [
   {
@@ -27,6 +28,10 @@ const appRoutes: Routes = [
   {
     path: 'jerseyList',
     component: JerseyListComponent
+  },
+  {
+    path: 'jerseyDetail/:id',
+    component: JerseyDetailComponent
   }
 ];
 

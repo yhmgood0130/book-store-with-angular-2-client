@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h2 class="section-headline"><span>Jersey Info</span></h2>
+    </div>
+    <div class="col-xs-4">
+      <img src="../../../assets/image/logo.png" class="img-responsive right" style="width:400px; margin-top:80px; margin-bottom:20px; z-index:1;"  />
+    </div>
+    <img src="../../../assets/image/jersey.png" class="img-responsive right" style="position:absolute; width:90%; height:30%; margin-top: 90px; z-index:-2;" />
+  </div>
+  <hr style="position:absolute; width:88%; height:6px; background-color:#333; z-index:-1; margin-top:-287px;" />
+
+  <div class="row">
+    <div class="row" style="margin-top:120px;">
+      <div class="col-xs-3">
+
+
+        <a routerLink="/jerseyList">Back to jersey list</a>
+        <br />
+        <img class="img-responsive" src="{{serverPath}}/image/jersey/{{jersey.id}}.png" />
+      </div>
+      <div class="col-xs-9">
+        <h3><span *ngIf="addJerseySuccess" style="color:forestgreen"><i class="fa fa-check" style="color:forestgreen"></i>Added to cart.</span></h3>
+        <h3><span *ngIf="notEnoughStock" style="color:red">Oops, only <span>{{jersey.inStockNumber}}</span> In Stock.</span></h3>
+        <h3>{{jersey.title}}</h3>
+        <div class="row">
+          <div class="col-xs-5">
+            <h5><strong>Team: </strong><span>{{jersey.team}}</span></h5>
+            <p><strong>League: </strong><span>{{jersey.league}}</span></p>
+            <p><strong>Country: </strong><span>{{jersey.country}}</span></p>
+            <p><strong>Type: </strong><span>{{jersey.type}}</span></p>
+            <p><strong>Season: </strong><span>{{jersey.season}}</span></p>
+            <p><strong>Shipping Weight: </strong><span>{{jersey.shippingWeight}}</span> ounces</p>
+          </div>
+          <div class="col-xs-7">
+            <div class="panel panel-default" style="border-width:5px; margin0top:20px;">
+              <div class="panel-body">
+                <div class="col-xs-6">
+                  <h4>Our Price: <span style="color:#db3208;">$<span>{{jersey.ourPrice | number : '1.2-2'}}</span></span></h4>
+                  <p>List Price: <span style="text-decoration:line-through;">$<span>{{jersey.listPrice | number : '1.2-2'}}</span></span></p>
+                  <p>You Save: $<span>{{jersey.listPrice - jersey.ourPrice | number : '1.2-2'}}</span></p>
+                  <span>Qty: </span>
+                  <select [(ngModel)]="qty" class="browser-default" style="width:50px; display:inline;">
+                    <option *ngFor = "let x of numberList" [ngValue]="x">{{x}}</option>
+                  </select>
+                </div>
+                <div class="col-xs-6">
+                  <h4 *ngIf="jersey.inStockNumber > 10" style="color:green;">In Stock</h4>
+                  <h4 *ngIf="jersey.inStockNumber < 10 && jersey.inStockNumber > 0" style="color:green;">Only <span>{{jersey.inStockNumber}}</span> In Stock</h4>
+                  <h4 *ngIf="jersey.inStockNumber == 0" style="color:darkred;">Unavailable</h4>
+                </div>
+                <button mat-raised-button [disabled]="jersey.inStockNumber==0" (click)="onAddToCart()" color="primary">Add to Cart</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <p>{{jersey.description}}</p>
+    </div>
+  </div>
+</div>
