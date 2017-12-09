@@ -114,9 +114,218 @@
               <a mat-raised-button color="primary" (click)="goToPayment()">Next</a>
             </div>
           </mat-tab>
-          <mat-tab label="2. Shipping Address">
+          <mat-tab label="2. Payment Information">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">2. Payment Information</h4>
+              </div>
+              <div class="panel-body">
+                <table class="table" *ngIf="!emptyPaymentList">
+                  <thead>
+                    <tr>
+                      <td>
+                        <th>Available Credit Card</th>
+                        <th>Operation</th>
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let userPayment of userPaymentList">
+                      <td>
+                        {{userPayment.cardName}}
+                      </td>
+                      <td>
+                        <a class="pointer" (click)="setPaymentMethod(userPayment)">Use this payment</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!--Credit Card Information-->
+                <div class="row">
+                  <div class="col-xs-12">
+                    <img src="../../../assets/image/creditcard.png" class="img-responsive" />
+                    <br>
+                    <div class="form-group">
+                      <label for="cardType">* Select Card Type</label>
+                      <select id="cardType" class="form-control" name="cardType" [(ngModel)]="userPayment.type" required="required">
+                        <option value="" disabled>-- Card Type --</option>
+                        <option value="visa">Visa</option>
+                        <option value="mastercard">Masterard</option>
+                        <option value="discover">Discover</option>
+                        <option value="amex">American Express</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="cardHolder">* Card Holder</label>
+                      <input type="text" class="form-control" id="cardHolder" placeholder="Card Holder Name" name="cardHolderName" required="required" [(ngModel)]="payment.holderName" />
+                    </div>
+                    <div class="form-group">
+                      <label for="cardNumber">* Card Number</label>
+                      <div class="input-group">
+                        <input required="required" class="form-control" id="cardNumber" type="tel" name="cardNumber" placeholder="Valid Card Number" [(ngModel)]="payment.cardNumber" />
+                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="form-group">
+                      <label>* Expiration Date</label>
+                      <div class="row">
+                        <div class="col-xs-6">
+                          <select class="form-group" name="expiredMonth" required="required" [(ngModel)]="payment.expiredMonth">
+                            <option value="" disabled="disabled">-- Month --</option>
+                            <option value="1">Jan (01)</option>
+                            <option value="2">Feb (02)</option>
+                            <option value="3">Mar (03)</option>
+                            <option value="4">April (04)</option>
+                            <option value="5">May (05)</option>
+                            <option value="6">June (06)</option>
+                            <option value="7">JulY (07)</option>
+                            <option value="8">Aug (08)</option>
+                            <option value="9">Sep (09)</option>
+                            <option value="10">Oct (10)</option>
+                            <option value="11">Nov (11)</option>
+                            <option value="12">Dec (12)</option>
+                          </select>
+                        </div>
+                        <div class="col-xs-6">
+                          <select class="form-group" name="expiredYear" required="required" [(ngModel)]="payment.expiredYear">
+                            <option value="" disabled="disabled">-- Year --</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-5 pull-right">
+                    <div class="form-group">
+                      <label for="cardCVC">CV Code</label>
+                      <input type="tel" id="cardCVC" class="form-control" name="cardCVC" placeholder="CVC" [(ngModel)]="payment.cvc" />
+                    </div>
+                  </div>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input  id="theSameAsShippingAddress" type="checkbox" name="billingSameAsShipping" value="true" (click)="setBillingAsShipping($event.target.checked)" />The same as shipping address
+                  </label>
+                </div>
+
+                <!-- Billing Address -->
+
+                <div class="form-group">
+                  <label for="billingName">* Name</label>
+                  <input type="text" class="form-control" id="billingName" placeholder="Receiver name" name="billingAddressName" required="required" [(ngModel)]="billingAddress.billingAddressName" />
+                </div>
+                <div class="form-group">
+                  <label for="billingAddress">* Street Address</label>
+                  <input type="text" class="form-control" id="billAddress" placeholder="Street Address 1" name="billingAddressStreet1" required="required" [(ngModel)]="billingAddress.billingAddressStreet1" />
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Street Address 2" name="billingAddressStreet2" [(ngModel)]="billingAddress.billingAddressStreet2" />
+                </div>
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label for="billingCity">* City</label>
+                      <input type="text" class="form-control" id="billingAddressCity" placeholder="Your Billing City" name="billingAddressCity" required="required" [(ngModel)]="billingAddress.billingAddressCity" />
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label for="billingState">* State</label>
+                      <select id="billingState" class="form-control" name="billingAddresState" [(ngModel)]="billingAddress.billingAddressState" required="required">
+                        <option value="" disabled>-- state --</option>
+                        <option *ngFor="let state of stateList">{{state}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label for="billingZipcode">* Zipcode</label>
+                      <input type="text" class="form-control" id="billingAddressZipcode" placeholder="Zipcode" name="billingAddressZipcode" required="required" [(ngModel)]="billingAddress.billingAddressZipcode" />
+                    </div>
+                  </div>
+                </div>
+                <a mat-raised-button color="primary" (click)="goToReview()">Next</a>
+              </div>
+            </div>
           </mat-tab>
-          <mat-tab label="3. Shipping Address">
+          <mat-tab label="3. Review">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  3. Review Items and Shipping
+                </h4>
+              </div>
+              <div class="panel-body">
+                <h4>Choose your shipping method:</h4>\
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="shippingMethod" value="groupShipping" [(ngModel)]="shippingMethod" />
+                    Group Shipping
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="shippingMethod" value="premiumShipping" [(ngModel)]="shippingMethod" />
+                    Premium Shipping
+                  </label>
+                </div>
+                <div class="row">
+                  <div class="col-xs-8">
+                    <h4>Products</h4>
+                  </div>
+                  <div class="col-xs-2">
+                    <h4>Price</h4>
+                  </div>
+                  <div class="col-xs-2">
+                    <h4>Qty</h4>
+                  </div>
+                </div>
+
+                <!-- display products -->
+                <div class="row" *ngFor="let cartItem of cartItemList">
+                  <hr />
+                  <div class="col-xs-2">
+                    <a mat-button (click)="onSelect(cartItem.jersey)"><img class="img-responsive" src="{{serverPath}}/image/jersey/{{cartItem.jersey.id}}.png" style="width:70px;" /></a>
+                  </div>
+                  <div class="col-xs-6">
+                    <a class="pointer" (click)="onSelect(cartItem.jersey)">
+                      <h4>{{cartItem.jersey.title}}</h4>
+                    </a>
+                    <p *ngIf="cartItem.jersey.inStockNumber < 10 && cartItem.jersey.inStockNumber > 0" style="color:green;">Only <span>{{cartItem.jersey.inStockNumber}}</span> In Stock</p>
+                    <p *ngIf="cartItem.jersey.inStockNumber == 0" style="color:darkred;">Product Unavailable</p>
+                    <a class="pointer" (click)="onRemoveCartItem(cartItem)">delete</a>
+                  </div>
+                  <div class="col-xs-2">
+                    <h5 style="color:#db3208; font-size:large;">$<span [ngClass]="{'text-strike': cartItem.jersey.inStockNumber == 0}">{{cartItem.jersey.ourPrice}}</span></h5>
+                  </div>
+                  <div class="col-xs-2 text-center">
+                    <h5 style="font-sinze:large">{{cartItem.qty}}</h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <hr />
+                  <h4 class="col-xs-12 text-right"><strong style="font-size:large">Total Price (<span>{{cartItemNumber}} items):</span></strong><span style="color:#db3208; font-size:large">$ <span>{{shoppingCart.grandTotal}}</span></span></h4>
+                  <br /><br />
+                  <button mat-raised-button type="submit" class="btn-block" color="primary">Place your order</button>
+                  <p>By Placing your order, you agree to Moe's Jersey Store privacy notice and conditions of use.</p>
+                </div>
+              </div>
+            </div>
           </mat-tab>
         </mat-tab-group>
       </div>
