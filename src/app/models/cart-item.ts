@@ -1,6 +1,6 @@
 import { Jersey } from './jersey';
 import { ShoppingCart } from './shopping-cart';
-import { Order } from './order';
+// import { Order } from './order';
 
 export class CartItem {
   public id: number;

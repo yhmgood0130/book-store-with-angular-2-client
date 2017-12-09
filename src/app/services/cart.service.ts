@@ -24,7 +24,7 @@ export class CartService {
     return this.http.post(url, cartItemInfo, { headers: tokenHeader})
   }
 
-  getCatItemList() {
+  getCartItemList() {
     let url = this.serverPath + "/cart/getCartItemList";
 
     let tokenHeader = new Headers({

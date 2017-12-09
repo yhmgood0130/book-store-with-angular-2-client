@@ -29,29 +29,6 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigate(['/jerseyDetail', this.selectedJersey.id]);
   }
 
-
-  getCartItemList() {
-    this.cartService.getCartItemList().subscribe(
-      res =>{
-        this.cartItemList = res.json();
-        this.cartItemNumber = this.cartItemList.length;
-      }, error =>{
-        console.log(error.text());
-      }
-    )
-  }
-
-  getShoppingCart() {
-    this.cartService.getShoppingCart().subscribe(
-      res =>{
-        console.log(res.json());
-        this.shoppingCart = res.json();
-      }, error =>{
-        console.log(error.text());
-      }
-    )
-  }
-
   onRemoveCartItem(cartItem: CartItem){
     this.cartService.removeCartItem(cartItem.id).subscribe(
       res => {
@@ -70,6 +47,28 @@ export class ShoppingCartComponent implements OnInit {
         console.log(res.text());
         this.cartItemUpdated = true;
         this.getShoppingCart();
+      }, error =>{
+        console.log(error.text());
+      }
+    )
+  }
+
+  getCartItemList() {
+    this.cartService.getCartItemList().subscribe(
+      res =>{
+        this.cartItemList = res.json();
+        this.cartItemNumber = this.cartItemList.length;
+      }, error =>{
+        console.log(error.text());
+      }
+    )
+  }
+
+  getShoppingCart() {
+    this.cartService.getShoppingCart().subscribe(
+      res =>{
+        console.log(res.json());
+        this.shoppingCart = res.json();
       }, error =>{
         console.log(error.text());
       }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppConst } from '../../constants/app-const';
 import { JerseyService } from '../../services/jersey.service';
+import { CartService } from '../../services/cart.service';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { Jersey } from '../../models/jersey';
 
@@ -21,10 +22,18 @@ export class JerseyDetailComponent implements OnInit {
   private addJerseySuccess: boolean = false;
   private notEnoughStock:boolean = false;
 
-  constructor(private jerseyService:JerseyService, private router: Router, private route: ActivatedRoute, private http:Http) { }
+  constructor(private jerseyService:JerseyService, private cartService:CartService, private router: Router, private route: ActivatedRoute, private http:Http) { }
 
   onAddToCart(){
-
+    this.cartService.addItem(this.jerseyId, this.qty).subscribe(
+      res => {
+        console.log(res.text());
+        this.addJerseySuccess = true;
+      }, error => {
+        console.log(error.text());
+        this.notEnoughStock = true;
+      }
+    );
   }
 
 
