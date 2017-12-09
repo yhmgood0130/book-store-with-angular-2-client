@@ -17,6 +17,8 @@ import { PaymentService } from './services/payment.service';
 import { ShippingService } from './services/shipping.service';
 import { JerseyService } from './services/jersey.service';
 import { CartService } from './services/cart.service';
+import { OrderService } from './services/order.service';
+import { CheckoutService } from './services/checkout.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -26,6 +28,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { JerseyListComponent } from './components/jersey-list/jersey-list.component';
 import { JerseyDetailComponent } from './components/jersey-detail/jersey-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { OrderComponent } from './components/order/order.component';
 
 
 @NgModule({
@@ -38,7 +41,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     JerseyListComponent,
     DataFilterPipe,
     JerseyDetailComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     PaymentService,
     ShippingService,
     JerseyService,
-    CartService
+    CartService,
+    OrderService,
+    CheckoutService
   ],
   bootstrap: [AppComponent]
 })
