@@ -1,3 +1,72 @@
-<p>
-  shopping-cart works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h2 class="section-headline"><span>Shopping Cart</span></h2>
+    </div>
+    <div class="col-xs-4">
+      <img src="../../../assets/image/logo.png" class="img-responsive right" style="width:400px; margin-top:80px; z-index:1;"  />
+    </div>
+    <img src="../../../assets/image/jersey.png" class="img-responsive right" style="position:absolute; width:90%; height:30%; margin-top: 90px; z-index:-2;" />
+  </div>
+
+  <hr style="position:absolute; width:88%; height:6px; background-color:#333; z-index:-1; margin-top:-287px;" />
+  <div class="row" style="margin-top:120px;">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-6 text-left">
+          <a mat-raised-button color="warn" routerLink="/jerseyList">Continue Shopping</a>
+        </div>
+        <div class="col-xs-6 text-right">
+          <a mat-raised-button color="warn" routerLink="/jerseyList">Check Out</a>
+        </div>
+      </div>
+      <br/>
+      <div *ngIf="cartItemUpdated" class="alert alert-success">
+        Cart Item Updated Successfully!
+      </div>
+      <div *ngIf="notEnoughStock" class="alert alert-warning">
+        Oops, some of the products don't have enough stock. Please update product quantity.
+      </div>
+      <div *ngIf="emptyCart" class="alert alert-warning">
+        Oops, your cart is empty. See if you can find what you link in the jersey locker and add them to cart.
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <h4>Products</h4>
+        </div>
+        <div class="col-xs-2">
+          <h4>Price</h4>
+        </div>
+        <div class="col-xs-2">
+          <h4>Qty</h4>
+        </div>
+      </div>
+      <div class="row" *ngFor="let cartItem of cartItemList">
+        <hr />
+        <div class="col-xs-2">
+          <a mat-button (click)="onSelect(cartItem.jersey)"><img class="img-responsive" src="{{serverPath}}/image/jersey/{{cartItem.jersey.id}}.png" style="width:70px;" /></a>
+        </div>
+        <div class="col-xs-6">
+          <a class="pointer" (click)="onSelect(cartItem.jersey)">
+            <h4>{{cartItem.jersey.title}}</h4>
+          </a>
+          <p *ngIf="cartItem.jersey.inStockNumber < 10 && cartItem.jersey.inStockNumber > 0" style="color:green;">Only <span>{{cartItem.jersey.inStockNumber}}</span> In Stock</p>
+          <p *ngIf="cartItem.jersey.inStockNumber == 0" style="color:darkred;">Product Unavailable</p>
+          <a class="pointer" (click)="onRemoveCartItem(cartItem)">delete</a>
+        </div>
+        <div class="col-xs-2">
+          <h5 style="color:#db3208; font-size:large;">$<span [ngClass]="{'text-strike': cartItem.jersey.inStockNumber == 0}">{{cartItem.jersey.ourPrice}}</span></h5>
+        </div>
+        <div class="col-xs-2">
+          <input hidden="hidden" [(ngModel)]="cartItem.id" name="id" />
+          <input id="cartItem.id" name="qty" [disabled]="cartItem.jersey.inStockNumber==0" class="form-control carItemQty" [(ngModel)]="cartItem.qty" (ngModelChange)="cartItem.toUpdate=true" />
+          <a mat-button *ngIf="cartItem.toUpdate" class="pointer" color="warn" (click)="onUpdateCartItem(cartItem)">Update </a>
+        </div>
+      </div>
+      <div class="row">
+        <hr />
+        <h4 class="col-xs-12 text-right"><strong style="font-size:large">Total Price (<span>{{cartItemNumber}} items):</span></strong><span style="color:#db3208; font-size:large">$ <span>{{shoppingCart.grandTotal}}</span></span></h4>
+      </div>
+    </div>
+  </div>
+</div>
