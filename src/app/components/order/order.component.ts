@@ -22,7 +22,66 @@ import { Order } from '../../models/order';
 })
 export class OrderComponent implements OnInit {
 
-  constructor() { }
+  private serverPath:string = AppConst.serverPath;
+  private selectedJersey: Jersey;
+  private cartItemList: CartItem[] = [];
+  private cartItemNumber: number;
+  private shoppingCart: ShoppingCart = new ShoppingCart();
+  private cartItemUpdated: boolean;
+  private shippingAddress: ShippingAddress = new ShippingAddress();
+  private billingAddress: BillingAddress = new BillingAddress();
+  private userPayment: UserPayment = new UserPayment();
+  private userShipping: UserShipping = new UserShipping();
+  private userBilling: UserBilling = new UserBilling();
+
+  private userShippingList: UserShipping[] = [];
+  private userPaymentList: UserPayment[] = [];
+  private payment: Payment = new Payment();
+  private selectedTab: number;
+  private emptyShippingList: boolean = true;
+  private emptyPaymentList: boolean = true;
+  private stateList: string[] = [];
+  private order:Order = new Order();
+
+  constructor(private router:Router, private cartService: CartService, private shippingService: ShippingService, private paymentService: PaymentService, private checkoutService: CheckoutService) { }
+
+  onSelect(jersey: Jersey) {
+    this.selectedJersey = jersey;
+    this.router.navigate(['/jerseyDetail', this.selectedJersey.id]);
+  }
+
+  selectedChange(val: number) {
+    this.selectedTab = val;
+  }
+
+  goToPayment() {
+    this.selectedTab = 1;
+  }
+
+  goToReview() {
+    this.selectedTab = 2;
+  }
+
+  getCartItemList() {
+    this.cartService.getCartItemList().subscribe(
+      res => {
+        this.cartItemList = res.json();
+        this.cartItemNumber = this.cartItemList.length;
+      }, error => {
+          console.log(error.text());
+      }
+    );
+  }
+
+  setShippingAddress(userShipping: UserShipping) {
+    this.shippingAddress.shippingAddressName = userShipping.userShippingName;
+    this.shippingAddress.shippingAddressStreet1 = userShipping.userShippingStreet1;
+    this.shippingAddress.shippingAddressStreet2 = userShipping.userShippingStreet2;
+    this.shippingAddress.shippingAddressCity = userShipping.userShippingCity;
+    this.shippingAddress.shippingAddressState = userShipping.userShippingState;
+    this.shippingAddress.shippingAddressCountry = userShipping.userShippingCountry;
+    this.shippingAddress.shippingAddressZipcode = userShipping.userShippingZipcode;
+  }
 
   ngOnInit() {
   }

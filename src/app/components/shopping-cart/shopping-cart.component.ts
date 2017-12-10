@@ -38,7 +38,7 @@ export class ShoppingCartComponent implements OnInit {
       }, error => {
           console.log(error.text());
       }
-    )
+    );
   }
 
   onUpdateCartItem(cartItem: CartItem){
