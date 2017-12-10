@@ -8,10 +8,11 @@ import { PaymentService } from '../../services/payment.service';
 import { CheckoutService } from '../../services/checkout.service';
 import { CartItem } from '../../models/cart-item';
 import { ShoppingCart } from '../../models/shopping-cart';
-import { ShoppingAddress } from '../../models/shopping-address';
+import { ShippingAddress } from '../../models/shipping-address';
 import { BillingAddress } from '../../models/billing-address';
 import { UserPayment } from '../../models/user-payment';
 import { UserShipping } from '../../models/user-shipping';
+import { UserBilling } from '../../models/user-billing';
 import { Payment } from '../../models/payment';
 import { Order } from '../../models/order';
 
@@ -41,6 +42,7 @@ export class OrderComponent implements OnInit {
   private emptyShippingList: boolean = true;
   private emptyPaymentList: boolean = true;
   private stateList: string[] = [];
+  private shippingMethod: string;
   private order:Order = new Order();
 
   constructor(private router:Router, private cartService: CartService, private shippingService: ShippingService, private paymentService: PaymentService, private checkoutService: CheckoutService) { }
@@ -83,7 +85,119 @@ export class OrderComponent implements OnInit {
     this.shippingAddress.shippingAddressZipcode = userShipping.userShippingZipcode;
   }
 
+  setPaymentMethod(userPayment: UserPayment) {
+    this.payment.type = userPayment.type;
+    this.payment.cardNumber = userPayment.cardNumber;
+    this.payment.expiredMonth = userPayment.expiredMonth;
+    this.payment.expiredYear = userPayment.expiredYear;
+    this.payment.cvc = userPayment.cvc;
+    this.payment.holderName = userPayment.holderName;
+    this.payment.defaultPayment = userPayment.defaultPayment;
+
+    this.billingAddress.billingAddressName = userBilling.userBillingName;
+    this.billingAddress.billingAddressStreet1 = userBilling.userBillingStreet1;
+    this.billingAddress.billingAddressStreet2 = userBilling.userBillingStreet2;
+    this.billingAddress.billingAddressCity = userBilling.userBillingCity;
+    this.billingAddress.billingAddressState = userBilling.userBillingState;
+    this.billingAddress.billingAddressCountry = userBilling.userBillingCountry;
+    this.billingAddress.billingAddressZipcode = userBilling.userBillingZipcode;
+  }
+
+  setBillingAsShipping(checked: boolean) {
+    console.log("same as shopping");
+
+    if(checked) {
+      this.billingAddress.billingAddressName = this.shippingAddress.shippingAddressName;
+      this.billingAddress.billingAddressStreet1 = this.shippingAddress.shippingAddressStreet1;
+      this.billingAddress.billingAddressStreet2 = this.shippingAddress.shippingAddressStreet2;
+      this.billingAddress.billingAddressCity = this.shippingAddress.shippingAddressCity;
+      this.billingAddress.billingAddressState = this.shippingAddress.shippingAddressState;
+      this.billingAddress.billingAddressCountry = this.shippingAddress.shippingAddressCountry;
+      this.billingAddress.billingAddressZipcode = this.shippingAddress.shippingAddressZipcode;
+    }
+  }
+
+  onSubmit() {
+    this.checkoutService.checkout(
+      this.shippingAddress,
+      this.billingAddress,
+      this.payment,
+      this.shippingMethod
+    ).subscribe(
+      res => {
+        this.order = res.json();
+        console.log(this.order);
+
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            "order": JSON.stringify(this.order)
+          }
+        };
+
+        this.router.navigate(['/orderSummary'], navigationExtras);
+      }, error => {
+        console.log(error.text());
+      }
+    );
+  }
+
   ngOnInit() {
+    this.getCartItemList();
+
+    this.cartService.getShoppingCart().subscribe(
+      res => {
+        this.shoppingCart = res.json();
+      }, error => {
+        console.log(error.text());
+      }
+    );
+
+    this.shippingService.getUserShippingList().subscribe(
+      res => {
+        this.userShippingList = res.json();
+        if(this.userShippingList.length){
+          this.emptyShippingList = false;
+
+          for(let userShipping of this.userShippingList) {
+            if(userShipping.userShippingDefault){
+              this.setShippingAddress(userShipping);
+              return;
+            }
+          }
+        }
+      }, error => {
+        console.log(error.text());
+      }
+    );
+
+    this.paymentService.getUserPaymentList().subscribe(
+      res => {
+        this.userPaymentList = res.json();
+        if(this.userPaymentList.length){
+          this.emptyPaymentList = false;
+
+          for(let userPayment of this.userPaymentList) {
+            if(userPayment.userPaymentDefault){
+              this.setPaymentAddress(userPayment);
+              return;
+            }
+          }
+        }
+      }, error => {
+        console.log(error.text());
+      }
+    );
+
+    for (let s in AppConst.usStates) {
+      this.stateList.push(s);
+    }
+
+    this.payment.type="";
+    this.payment.expiredMonth = "";
+    this.payment.expiredYear = "";
+    this.billingAddress.billingAddressState = "";
+    this.shippingAddress.shippingAddressState = "";
+    this.shippingMethod = "groundShipping";
   }
 
 }

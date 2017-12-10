@@ -20,7 +20,7 @@ export class PaymentService {
     return this.http.post(url, JSON.stringify(payment), {headers: tokenHeader});
   }
 
-  getUserPayment() {
+  getUserPaymentList() {
     let url = this.serverPath + "/payment/getUserPaymentList";
 
     let tokenHeader = new Headers ({
