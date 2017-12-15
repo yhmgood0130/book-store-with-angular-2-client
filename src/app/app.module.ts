@@ -29,6 +29,7 @@ import { JerseyListComponent } from './components/jersey-list/jersey-list.compon
 import { JerseyDetailComponent } from './components/jersey-detail/jersey-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { OrderComponent } from './components/order/order.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { OrderComponent } from './components/order/order.component';
     DataFilterPipe,
     JerseyDetailComponent,
     ShoppingCartComponent,
-    OrderComponent
+    OrderComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,

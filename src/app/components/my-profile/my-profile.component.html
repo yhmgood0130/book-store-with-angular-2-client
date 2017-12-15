@@ -83,6 +83,8 @@
                     <button mat-raised-button type="submit" color="primary" id="updateUserInfoButton">Save</button>
                   </form>
                 </mat-tab>
+                <mat-tab label="Order(s)">
+                </mat-tab>
                 <mat-tab label="Payment">
 									<br>
                   <br>
@@ -181,9 +183,9 @@
 																</select>
 															</div>
                               <div class="form-group">
-																<label for="cardHolder">* Card Holder</label>
-																<input type="text" class="form-control" id="cardHolder" placeholder="Card Holder Name" name="cardHolderName" required="required" [(ngModel)]="userPayment.holderName" />
-															</div>
+                                  <label for="cardHolder">* Card Holder</label>
+                                  <input type="text" class="form-control" id="cardholder" placeholder="Card Holder Name" name="cardHolderName" required="required" [(ngModel)]="userPayment.holderName" />
+                              </div>
                               <div class="form-group">
 																<label for="cardNumber">* Card Number</label>
                                 <div class="input-group">

@@ -8,6 +8,7 @@ import { JerseyListComponent } from './components/jersey-list/jersey-list.compon
 import { JerseyDetailComponent } from './components/jersey-detail/jersey-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { OrderComponent } from './components/order/order.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 
 const appRoutes: Routes = [
   {
@@ -42,6 +43,10 @@ const appRoutes: Routes = [
   {
     path: 'checkout',
     component: OrderComponent
+  },
+  {
+    path: 'orderSummary',
+    component: OrderSummaryComponent
   }
 ];
 

@@ -9,6 +9,8 @@ import { UserPayment } from '../../models/user-payment';
 import { UserBilling } from '../../models/user-billing';
 import { UserShipping } from '../../models/user-shipping';
 import { Router } from '@angular/router';
+import { Order } from '../../models/order';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -46,7 +48,11 @@ export class MyProfileComponent implements OnInit {
   private defaultUserShippingId: number;
   private defaultShippingSet: boolean;
 
-  constructor(private loginService:LoginService, private userService:UserService, private paymentService:PaymentService, private shippingService:ShippingService, private router:Router) { }
+  private orderList: Order[] = [];
+  private order: Order = new Order();
+  private displayOrderDetail: boolean;
+
+  constructor(private loginService:LoginService, private userService:UserService, private paymentService:PaymentService, private shippingService:ShippingService, private orderService: OrderService, private router:Router) { }
 
   selectedBillingChange(val: number) {
     this.selectedBillingTab = val;
@@ -74,7 +80,9 @@ export class MyProfileComponent implements OnInit {
       res =>{
         this.getCurrentUser();
         this.selectedBillingTab = 0;
+        console.log(this.userPayment);
         this.userPayment = new UserPayment();
+
       }, error =>{
         console.log(error.text());
       }
@@ -148,6 +156,12 @@ export class MyProfileComponent implements OnInit {
     )
   }
 
+  onDisplayOrder(order: Order) {
+    console.log(order);
+    this.order = order;
+    this.displayOrderDetail = true;
+  }
+
   onUpdatePayment(payment: UserPayment) {
     this.userPayment = payment;
     this.userBilling = payment.userBilling;
@@ -188,6 +202,14 @@ export class MyProfileComponent implements OnInit {
     );
 
     this.getCurrentUser();
+
+    this.orderService.getOrderList().subscribe(
+      res => {
+        this.orderList = res.json();
+      }, error => {
+        console.log(error.text());
+      }
+    );
 
     for(let s in AppConst.usStates){
       this.stateList.push(s);

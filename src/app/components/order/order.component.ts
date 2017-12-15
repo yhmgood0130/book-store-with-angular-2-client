@@ -94,13 +94,13 @@ export class OrderComponent implements OnInit {
     this.payment.holderName = userPayment.holderName;
     this.payment.defaultPayment = userPayment.defaultPayment;
 
-    this.billingAddress.billingAddressName = userBilling.userBillingName;
-    this.billingAddress.billingAddressStreet1 = userBilling.userBillingStreet1;
-    this.billingAddress.billingAddressStreet2 = userBilling.userBillingStreet2;
-    this.billingAddress.billingAddressCity = userBilling.userBillingCity;
-    this.billingAddress.billingAddressState = userBilling.userBillingState;
-    this.billingAddress.billingAddressCountry = userBilling.userBillingCountry;
-    this.billingAddress.billingAddressZipcode = userBilling.userBillingZipcode;
+    this.billingAddress.billingAddressName = userPayment.userBilling.userBillingName;
+    this.billingAddress.billingAddressStreet1 = userPayment.userBilling.userBillingStreet1;
+    this.billingAddress.billingAddressStreet2 = userPayment.userBilling.userBillingStreet2;
+    this.billingAddress.billingAddressCity = userPayment.userBilling.userBillingCity;
+    this.billingAddress.billingAddressState = userPayment.userBilling.userBillingState;
+    this.billingAddress.billingAddressCountry = userPayment.userBilling.userBillingCountry;
+    this.billingAddress.billingAddressZipcode = userPayment.userBilling.userBillingZipcode;
   }
 
   setBillingAsShipping(checked: boolean) {
@@ -177,8 +177,8 @@ export class OrderComponent implements OnInit {
           this.emptyPaymentList = false;
 
           for(let userPayment of this.userPaymentList) {
-            if(userPayment.userPaymentDefault){
-              this.setPaymentAddress(userPayment);
+            if(userPayment.defaultPayment){
+              this.setPaymentMethod(userPayment);
               return;
             }
           }

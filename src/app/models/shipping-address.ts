@@ -2,7 +2,7 @@ import { Order } from './order';
 
 export class ShippingAddress {
   public id: number;
-  public shippingAddress: string;
+  public shippingAddressName: string;
   public shippingAddressStreet1: string;
   public shippingAddressStreet2: string;
   public shippingAddressCity: string;
