@@ -1,27 +1,32 @@
-# StoreFront
+# Soccer-Jersey-Store with Angular.js 2 Store Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
+## Project Description
 
-## Development server
+This repo is for Store Front Client-Side for Soccer-Jersey-Store web application where the user can sign up / in and shop soccer jerseys.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## User Story
 
-## Code scaffolding
+- As a user, I want to see the list of jerseys.
+- As a user, I want to sign up to save my information for the future.
+- As a user, I want to save my payment method, shipping address to save the time.
+- As a user, I want to see if I can reset my password when I forget the password.
+- As a user, I want to see the previous transaction history.
+- As a user, I want to receive the order confirmation email.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Built with
 
-## Build
+Front-end - Angular 2, Angular Material, Bootstrap, Lodash,  Angular2-Datatable, Hammer.js, Font-Awesome
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Back-end - Spring Boot, Eclipse, MySQL, MySQL Workbench, Redis, JavaMail
 
-## Running unit tests
+## Links to Server-side & Client-Side
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [Server-side Repo](https://github.com/yhmgood0130/soccerjersey-server-with-spring-boot)
 
-## Running end-to-end tests
+- [Admin-Portal Repo](https://github.com/yhmgood0130/soccer-jersey-store-with-angular-2-admin)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## License
+MIT License
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Copyright © 2017 Hyunmo Yang
