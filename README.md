@@ -17,11 +17,11 @@ This repo is for Store Front Client-Side for Soccer-Jersey-Store web application
 
 Front-end - Angular 2, Angular Material, Bootstrap, Lodash,  Angular2-Datatable, Hammer.js, Font-Awesome
 
-Back-end - Spring Boot, Eclipse, MySQL, MySQL Workbench, Redis, JavaMail
+Back-end - Java, Spring [ Spring Boot, Spring Security, Spring Data, etc ], Eclipse, MySQL, MySQL Workbench, Redis, JavaMail
 
 ## Links to Server-side & Client-Side
 
-- [Server-side Repo](https://github.com/yhmgood0130/soccerjersey-server-with-spring-boot)
+- [Server-side Repo](https://github.com/yhmgood0130/soccerjersey-server-with-java-spring-framework)
 
 - [Admin-Portal Repo](https://github.com/yhmgood0130/soccer-jersey-store-with-angular-2-admin)
 
